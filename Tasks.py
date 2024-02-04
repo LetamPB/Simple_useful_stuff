@@ -22,3 +22,42 @@ def to_base10(binary):
 
 
 print(to_base10(11111111))
+
+
+def encrypt(message, shifts, alphabet):
+    """"Encrypts a plain text message using an improved Caesar cipher encryption method.
+
+    Args:
+    - message (str): The plain text message to be encrypted.
+    - shifts (list): A list of n positive integers representing the shift values for each character in the message.
+    - alphabet (str): A string representing the alphabet used for encryption. Can be any sequence of symbols.
+
+    Returns:
+    - str: The encrypted message.
+
+        """
+    encryption = ""
+    for (letter, shift_value) in zip(message, shifts):
+        # to check if size of the shifts is the same as the size of the
+        # message
+
+        if len(shifts) != len(message):
+            return None
+
+        if shift_value < 0 or shift_value > len(alphabet):
+            # to ensure that every individual shift value is not more
+            # than the length of the alphabet or a negative number
+            return None
+
+        if letter in alphabet:
+            sub_index = (alphabet.index(letter)+shift_value) % len(alphabet)
+
+        elif letter not in alphabet:
+            # to check that every letter in the message is in the alphabet
+            return None
+
+        encryption += alphabet[sub_index]
+    return encryption
+
+
+# print(encrypt(encryption_info, shift_info, alphabet_info))
